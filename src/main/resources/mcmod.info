@@ -1,0 +1,17 @@
+[
+{
+  "modid": "tmemes",
+  "name": "Modular Electro-Mechanical Enhancement Systems",
+  "description": "Electrically-augmented tooling!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Phanta"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["tconstruct", "mekanism", "mekanismgenerators", "mekanismtools"],
+  "requiredMods": ["tconstruct", "mekanism", "mekanismgenerators", "mekanismtools"]
+}
+]

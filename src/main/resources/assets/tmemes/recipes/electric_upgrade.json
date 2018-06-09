@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ata",
+    "ici",
+    "i i"
+  ],
+  "result": {
+    "item": "tmemes:electric_upgrade"
+  },
+  "key": {
+    "t": {
+      "item": "mekanism:energytablet"
+    },
+    "a": {
+      "ore": "circuitElite",
+      "type": "forge:ore_dict"
+    },
+    "c": {
+      "item": "mekanism:basicblock",
+      "data": 8
+    },
+    "i": {
+      "item": "mekanism:basicblock2",
+      "data": 1
+    }
+  }
+}
