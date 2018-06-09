@@ -54,12 +54,10 @@ public class TraitDisassembling extends ModifierTrait {
                 ItemAtomicDisassembler.Finder finder
                         = new ItemAtomicDisassembler.Finder(world, broken, coord, trace);
                 for (Coord4D block : finder.calc()) {
-                    if (tool.isEmpty())
+                    if (ToolHelper.isBroken(tool))
                         break;
-                    if (!block.equals(coord)) {
+                    if (!block.equals(coord))
                         ToolHelper.breakExtraBlock(tool, world, (EntityPlayer)player, block.getPos(), pos);
-                        tool.damageItem(1, player);
-                    }
                 }
                 lock.remove(player.getPersistentID());
             }
