@@ -24,6 +24,8 @@ public class TraitElectromechanical extends ModifierTrait {
 
     @Override
     public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
+        if (entity.getEntityWorld().isRemote)
+            return 0;
         if (newDamage > 0) {
             int energy = tool.getTagCompound().getInteger("memeEnergy"), cost = newDamage * ENERGY_PER_WORK;
             if (energy >= cost) {
