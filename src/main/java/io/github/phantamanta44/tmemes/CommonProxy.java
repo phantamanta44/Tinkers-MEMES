@@ -1,5 +1,6 @@
 package io.github.phantamanta44.tmemes;
 
+import io.github.phantamanta44.tmemes.capability.CapabilityEventHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -12,8 +13,9 @@ public class CommonProxy {
 
     private final Collection<Item> itemsToRegister = new LinkedList<>();
 
-    public CommonProxy() {
+    public void registerEventHandlers() {
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new CapabilityEventHandler());
     }
 
     public void registerItem(Item item) {

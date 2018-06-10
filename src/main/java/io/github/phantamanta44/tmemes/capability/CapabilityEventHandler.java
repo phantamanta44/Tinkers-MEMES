@@ -7,16 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.library.client.CustomFontColor;
 import slimeknights.tconstruct.library.tools.TinkerToolCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 
 public class CapabilityEventHandler {
 
@@ -26,18 +22,6 @@ public class CapabilityEventHandler {
     public void modify(AttachCapabilitiesEvent<ItemStack> event) {
         if (event.getObject().getItem() instanceof TinkerToolCore) {
             event.addCapability(CAP_SRC, new MemeCapabilityProvider(event.getObject()));
-        }
-    }
-
-    @SubscribeEvent
-    public void onTooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof TinkerToolCore
-                && event.getItemStack().hasCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH)) {
-            IEnergyStorage energy = event.getItemStack().getCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH);
-            int stored = energy.getEnergyStored();
-            int max = energy.getMaxEnergyStored();
-            event.getToolTip().add(1, String.format("%s%,d / %,d FE",
-                    CustomFontColor.encodeColor(Color.HSBtoRGB(0.33F * stored / max, 1F, 0.67F)), stored, max));
         }
     }
 
