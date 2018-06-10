@@ -25,12 +25,11 @@ public class MEMES {
     @SidedProxy(
             clientSide = "io.github.phantamanta44.tmemes.client.ClientProxy",
             serverSide = "io.github.phantamanta44.tmemes.CommonProxy")
-    private static CommonProxy proxy;
+    public static CommonProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MemeItems.init();
-        proxy.registerRenders();
     }
 
     @EventHandler
