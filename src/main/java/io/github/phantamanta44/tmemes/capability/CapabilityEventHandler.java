@@ -33,11 +33,11 @@ public class CapabilityEventHandler {
             this.stack = stack;
         }
 
+        @SuppressWarnings("ConstantConditions")
         @Override
         public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
             return capability == CapabilityEnergy.ENERGY
-                    && stack.hasTagCompound()
-                    && stack.getTagCompound().hasKey("memeEnergyCapacity");
+                    && stack.hasTagCompound() && stack.getTagCompound().hasKey("memeEnergyCapacity");
         }
 
         @Nullable

@@ -8,6 +8,8 @@ import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
 import slimeknights.tconstruct.tools.modifiers.ModMendingMoss;
 
+import java.util.Objects;
+
 public class TraitElectromechanical extends ModifierTrait {
 
     private static final int ENERGY_PER_WORK = 160;
@@ -27,7 +29,8 @@ public class TraitElectromechanical extends ModifierTrait {
         if (entity.getEntityWorld().isRemote)
             return 0;
         if (newDamage > 0) {
-            int energy = tool.getTagCompound().getInteger("memeEnergy"), cost = newDamage * ENERGY_PER_WORK;
+            int energy = Objects.requireNonNull(tool.getTagCompound()).getInteger("memeEnergy");
+            int cost = newDamage * ENERGY_PER_WORK;
             if (energy >= cost) {
                 tool.getTagCompound().setInteger("memeEnergy", energy - cost);
                 return 0;

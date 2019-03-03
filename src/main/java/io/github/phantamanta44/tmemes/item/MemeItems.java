@@ -5,6 +5,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@SuppressWarnings("NullableProblems")
 public class MemeItems {
 
     public static ItemElectricUpgrade ELECTRIC_UPGRADE;

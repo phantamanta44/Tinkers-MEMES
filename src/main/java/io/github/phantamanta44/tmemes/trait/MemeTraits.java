@@ -2,6 +2,7 @@ package io.github.phantamanta44.tmemes.trait;
 
 import io.github.phantamanta44.tmemes.item.MemeItems;
 
+@SuppressWarnings("NullableProblems")
 public class MemeTraits {
 
     public static TraitElectromechanical ELECTRIC;

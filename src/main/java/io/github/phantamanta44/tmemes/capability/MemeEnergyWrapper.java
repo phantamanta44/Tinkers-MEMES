@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.IEnergyStorage;
 
+import java.util.Objects;
+
 public class MemeEnergyWrapper implements IEnergyStorage {
 
     private final ItemStack stack;
@@ -14,7 +16,7 @@ public class MemeEnergyWrapper implements IEnergyStorage {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        NBTTagCompound tag = stack.getTagCompound();
+        NBTTagCompound tag = Objects.requireNonNull(stack.getTagCompound());
         int stored = tag.getInteger("memeEnergy");
         int toTransfer = Math.min(maxReceive, tag.getInteger("memeEnergyCapacity") - stored);
         if (!simulate)
@@ -29,12 +31,12 @@ public class MemeEnergyWrapper implements IEnergyStorage {
 
     @Override
     public int getEnergyStored() {
-        return stack.getTagCompound().getInteger("memeEnergy");
+        return Objects.requireNonNull(stack.getTagCompound()).getInteger("memeEnergy");
     }
 
     @Override
     public int getMaxEnergyStored() {
-        return stack.getTagCompound().getInteger("memeEnergyCapacity");
+        return Objects.requireNonNull(stack.getTagCompound()).getInteger("memeEnergyCapacity");
     }
 
     @Override
