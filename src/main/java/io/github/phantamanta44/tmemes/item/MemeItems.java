@@ -8,5 +8,5 @@ public class MemeItems {
     public static void init() {
         ELECTRIC_UPGRADE = new ItemElectricUpgrade();
     }
-    
+
 }
