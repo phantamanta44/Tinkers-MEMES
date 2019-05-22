@@ -1,7 +1,10 @@
 package io.github.phantamanta44.tmemes.coremod;
 
 import net.minecraft.launchwrapper.IClassTransformer;
+import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import org.objectweb.asm.*;
+
+import javax.annotation.Nullable;
 
 public class MemeClassTransformer implements IClassTransformer {
 
@@ -18,14 +21,24 @@ public class MemeClassTransformer implements IClassTransformer {
 
     private static class RenderItemTransformer extends ClassVisitor {
 
+        @Nullable
+        private String className = null;
+
         RenderItemTransformer(int api, ClassVisitor cv) {
             super(api, cv);
         }
 
         @Override
+        public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+            this.className = name;
+            super.visit(version, access, name, signature, superName, interfaces);
+        }
+
+        @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-            if ((name.equals("renderItemOverlayIntoGUI") || name.equals("func_180453_a"))
-                    && Type.getArgumentTypes(desc).length == 5 && Type.getReturnType(desc) == Type.VOID_TYPE) {
+            String mappedName = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(className, name, desc);
+            if ((mappedName.equals("renderItemOverlayIntoGUI") || mappedName.equals("func_180453_a"))
+                    && Type.getReturnType(desc) == Type.VOID_TYPE) {
                 return new RenderItemOverlayIntoGuiTransformer(api, super.visitMethod(access, name, desc, signature, exceptions));
             }
             return super.visitMethod(access, name, desc, signature, exceptions);
@@ -43,17 +56,14 @@ public class MemeClassTransformer implements IClassTransformer {
 
         @Override
         public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
+            String mappedName = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(owner, name, desc);
             if (state == 0) {
-                if (opcode == Opcodes.INVOKEVIRTUAL && owner.equals("net/minecraft/item/Item")
-                        && Type.getReturnType(desc) == Type.BOOLEAN_TYPE) {
-                    Type[] argTypes = Type.getArgumentTypes(desc);
-                    if (argTypes.length == 1 && argTypes[0].getInternalName().equals("net/minecraft/item/ItemStack")) {
-                        state = 1;
-                    }
+                if (opcode == Opcodes.INVOKEVIRTUAL && mappedName.equals("showDurabilityBar")) {
+                    state = 1;
                 }
             } else if (state == 1) {
-                if (opcode == Opcodes.INVOKESTATIC && (name.equals("getMinecraft") || name.equals("func_71410_x"))
-                        && owner.equals("net/minecraft/client/Minecraft")) {
+                if (opcode == Opcodes.INVOKESTATIC
+                        && (mappedName.equals("getMinecraft") || mappedName.equals("func_71410_x"))) {
                     inject();
                     state = 2;
                 }
@@ -71,6 +81,7 @@ public class MemeClassTransformer implements IClassTransformer {
                     "handleRender",
                     "(Lnet/minecraft/item/ItemStack;II)V",
                     false);
+            System.out.println("Successfully injected energy bar thing!");
         }
 
     }
