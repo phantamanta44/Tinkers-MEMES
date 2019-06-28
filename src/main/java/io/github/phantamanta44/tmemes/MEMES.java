@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = MEMES.MOD_ID, name = MEMES.NAME, version = MEMES.VERSION)
+@Mod(modid = MEMES.MOD_ID, name = MEMES.NAME, version = MEMES.VERSION, useMetadata = true)
 public class MEMES {
 
     public static final String MOD_ID = "tmemes";

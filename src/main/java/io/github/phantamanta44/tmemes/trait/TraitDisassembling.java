@@ -1,8 +1,8 @@
 package io.github.phantamanta44.tmemes.trait;
 
 import mekanism.api.Coord4D;
+import mekanism.common.OreDictCache;
 import mekanism.common.item.ItemAtomicDisassembler;
-import mekanism.common.util.MekanismUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,7 +42,7 @@ public class TraitDisassembling extends ModifierTrait {
             RayTraceResult trace = doRayTrace(state, pos, player);
             ItemStack broken = state.getBlock().getPickBlock(state, trace, world, pos, (EntityPlayer)player);
             boolean shouldContinue = false;
-            for (String id : MekanismUtils.getOreDictName(broken)) {
+            for (String id : OreDictCache.getOreDictName(broken)) {
                 if (id.startsWith("ore") || id.equals("logWood")) {
                     shouldContinue = true;
                     break;
@@ -52,7 +52,7 @@ public class TraitDisassembling extends ModifierTrait {
                 lock.add(player.getPersistentID());
                 Coord4D coord = new Coord4D(pos, world);
                 ItemAtomicDisassembler.Finder finder
-                        = new ItemAtomicDisassembler.Finder(world, broken, coord, trace);
+                        = new ItemAtomicDisassembler.Finder((EntityPlayer)player, broken, coord, trace);
                 for (Coord4D block : finder.calc()) {
                     if (ToolHelper.isBroken(tool))
                         break;
@@ -65,8 +65,7 @@ public class TraitDisassembling extends ModifierTrait {
     }
 
     // From Mekanism's ItemAtomicDisassembler
-    private static RayTraceResult doRayTrace(IBlockState state, BlockPos pos, EntityLivingBase player)
-    {
+    private static RayTraceResult doRayTrace(IBlockState state, BlockPos pos, EntityLivingBase player) {
         Vec3d positionEyes = player.getPositionEyes(1.0F);
         Vec3d playerLook = player.getLook(1.0F);
         double blockReachDistance = player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue();
