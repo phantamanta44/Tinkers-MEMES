@@ -1,4 +1,6 @@
 item.tmemes:electric_upgrade.name=Electromechanical Actuator
 
 modifier.meme-electric.name=Electromechanical
+modifier.meme-electric.desc=§oActuation-packed!\n§rGrants the tool an energy buffer that is consumed in place of durability.
 modifier.meme-disassemble.name=Disassembling
+modifier.meme-disassemble.desc=§oRapid deconstruction!\n§rCauses the tool to disassemble entire veins of blocks.
