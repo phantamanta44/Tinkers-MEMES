@@ -26,6 +26,10 @@ public class CommonProxy {
         // NO-OP
     }
 
+    public void registerBookData() {
+        // NO-OP
+    }
+
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         itemsToRegister.forEach(event.getRegistry()::register);

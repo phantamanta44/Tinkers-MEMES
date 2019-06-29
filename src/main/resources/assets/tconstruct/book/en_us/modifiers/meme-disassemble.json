@@ -1,0 +1,17 @@
+{
+  "modifier": "meme-disassemble",
+  "text": [
+    {
+      "text": "For some reason, strapping a big ol' microcontroller to your tool makes it smart enough to disassemble blocks into their very atoms."
+    }
+  ],
+  "effects": [
+    "Causes the tool to operate in Atomic Disassembler \"vein\" mode"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe",
+    "tconstruct:hammer",
+    "tconstruct:hatchet",
+    "tconstruct:lumberaxe"
+  ]
+}

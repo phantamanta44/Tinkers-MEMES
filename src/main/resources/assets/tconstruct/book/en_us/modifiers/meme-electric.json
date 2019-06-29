@@ -1,0 +1,19 @@
+{
+  "modifier": "meme-electric",
+  "text": [
+    {
+      "text": "Everyone knows Newton's third law: when you whack a block with your pickaxe, the block whacks your pickaxe back. Using an actuator and a miniature induction cell, you might be able to offset some of that whack."
+    }
+  ],
+  "effects": [
+    "Grants the tool an internal energy buffer",
+    "The energy buffer will be depleted in place of tool durability",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe",
+    "tconstruct:hammer",
+    "tconstruct:shortbow",
+    "tconstruct:arrow"
+  ]
+}

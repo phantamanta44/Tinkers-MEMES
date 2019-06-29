@@ -35,6 +35,7 @@ public class MEMES {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         MemeTraits.init();
+        proxy.registerBookData();
     }
 
 }
