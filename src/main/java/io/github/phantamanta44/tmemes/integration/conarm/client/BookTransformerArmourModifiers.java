@@ -1,5 +1,6 @@
-package io.github.phantamanta44.tmemes.integration.conarm;
+package io.github.phantamanta44.tmemes.integration.conarm.client;
 
+import io.github.phantamanta44.tmemes.integration.conarm.MemeArmourTraits;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.data.PageData;
 import slimeknights.mantle.client.book.data.SectionData;
