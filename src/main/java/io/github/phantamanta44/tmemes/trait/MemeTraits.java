@@ -1,8 +1,11 @@
 package io.github.phantamanta44.tmemes.trait;
 
 import io.github.phantamanta44.tmemes.item.MemeItems;
+import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 @SuppressWarnings("NullableProblems")
@@ -10,16 +13,17 @@ public class MemeTraits {
 
     public static TraitElectromechanical ELECTRIC;
     public static TraitDisassembling DISASSEMBLE;
+    public static final List<ModifierTrait> MEME_MODIFIERS = new ArrayList<>();
 
     public static void init() {
-        ELECTRIC = new TraitElectromechanical();
-        ELECTRIC.addItem(MemeItems.ELECTRIC_UPGRADE);
-        DISASSEMBLE = new TraitDisassembling();
+        MEME_MODIFIERS.add(ELECTRIC = new TraitElectromechanical());
+        ELECTRIC.addItem(new ItemStack(MemeItems.ELECTRIC_UPGRADE), 1, 1);
+        MEME_MODIFIERS.add(DISASSEMBLE = new TraitDisassembling());
         DISASSEMBLE.addItem("circuitUltimate");
     }
 
     public static Stream<ModifierTrait> stream() {
-        return Stream.of(ELECTRIC, DISASSEMBLE);
+        return MEME_MODIFIERS.stream();
     }
 
 }

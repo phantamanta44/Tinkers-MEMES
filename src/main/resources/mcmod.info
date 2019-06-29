@@ -12,7 +12,7 @@
   "logoFile": "",
   "screenshots": [],
   "useDependencyInformation": true,
-  "dependencies": ["tconstruct", "mekanism", "mekanismgenerators", "mekanismtools"],
+  "dependencies": ["tconstruct", "mekanism", "mekanismgenerators", "mekanismtools", "conarm"],
   "requiredMods": [
     "tconstruct",
     "mekanism@[1.12.2-9.7.8.379,)",

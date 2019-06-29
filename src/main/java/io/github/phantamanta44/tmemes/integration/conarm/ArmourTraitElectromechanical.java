@@ -1,21 +1,21 @@
-package io.github.phantamanta44.tmemes.trait;
+package io.github.phantamanta44.tmemes.integration.conarm;
 
+import c4.conarm.lib.modifiers.ArmorModifierTrait;
+import io.github.phantamanta44.tmemes.trait.TraitElectromechanical;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
-import slimeknights.tconstruct.library.modifiers.ModifierTrait;
 import slimeknights.tconstruct.tools.modifiers.ModMendingMoss;
 
 import java.util.Objects;
 
-public class TraitElectromechanical extends ModifierTrait {
+public class ArmourTraitElectromechanical extends ArmorModifierTrait {
 
-    public static final int ENERGY_PER_WORK = 160;
-    public static final int ENERGY_CAPACITY = 80000;
-
-    public TraitElectromechanical() {
+    public ArmourTraitElectromechanical() {
         super("meme-electric", 0x9a1610, 5, 0);
     }
 
@@ -25,14 +25,14 @@ public class TraitElectromechanical extends ModifierTrait {
     }
 
     @Override
-    public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
-        if (entity.getEntityWorld().isRemote)
+    public int onArmorDamage(ItemStack armour, DamageSource source, int damage, int newDamage, EntityPlayer player, int slot) {
+        if (player.getEntityWorld().isRemote)
             return 0;
         if (newDamage > 0) {
-            int energy = Objects.requireNonNull(tool.getTagCompound()).getInteger("memeEnergy");
-            int cost = newDamage * ENERGY_PER_WORK;
+            int energy = Objects.requireNonNull(armour.getTagCompound()).getInteger("memeEnergy");
+            int cost = newDamage * 5 * TraitElectromechanical.ENERGY_PER_WORK;
             if (energy >= cost) {
-                tool.getTagCompound().setInteger("memeEnergy", energy - cost);
+                armour.getTagCompound().setInteger("memeEnergy", energy - cost);
                 return 0;
             }
         }
@@ -50,7 +50,7 @@ public class TraitElectromechanical extends ModifierTrait {
         if (!rootCompound.hasKey("memeEnergy")) {
             rootCompound.setInteger("memeEnergy", 0);
         }
-        rootCompound.setInteger("memeEnergyCapacity", ModifierNBT.readTag(modifierTag).level * ENERGY_CAPACITY);
+        rootCompound.setInteger("memeEnergyCapacity", ModifierNBT.readTag(modifierTag).level * TraitElectromechanical.ENERGY_CAPACITY);
     }
 
 }

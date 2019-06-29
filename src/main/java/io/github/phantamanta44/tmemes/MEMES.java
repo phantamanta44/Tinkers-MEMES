@@ -1,5 +1,7 @@
 package io.github.phantamanta44.tmemes;
 
+import io.github.phantamanta44.tmemes.integration.IntegrationManager;
+import io.github.phantamanta44.tmemes.integration.conarm.MemeIntegrationConArm;
 import io.github.phantamanta44.tmemes.item.MemeItems;
 import io.github.phantamanta44.tmemes.trait.MemeTraits;
 import net.minecraftforge.fml.common.Mod;
@@ -30,11 +32,13 @@ public class MEMES {
     public void preInit(FMLPreInitializationEvent event) {
         proxy.registerEventHandlers();
         MemeItems.init();
+        IntegrationManager.preInit();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         MemeTraits.init();
+        IntegrationManager.postInit();
         proxy.registerBookData();
     }
 

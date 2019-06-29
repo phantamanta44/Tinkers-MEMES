@@ -1,6 +1,7 @@
 package io.github.phantamanta44.tmemes.capability;
 
 import io.github.phantamanta44.tmemes.MEMES;
+import io.github.phantamanta44.tmemes.ElectricToolRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -9,7 +10,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.library.tools.TinkerToolCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ public class CapabilityEventHandler {
 
     @SubscribeEvent
     public void modify(AttachCapabilitiesEvent<ItemStack> event) {
-        if (event.getObject().getItem() instanceof TinkerToolCore) {
+        if (ElectricToolRegistry.isPotentiallyElectric(event.getObject())) {
             event.addCapability(CAP_SRC, new MemeCapabilityProvider(event.getObject()));
         }
     }

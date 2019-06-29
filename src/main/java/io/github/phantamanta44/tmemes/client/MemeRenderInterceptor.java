@@ -1,5 +1,6 @@
 package io.github.phantamanta44.tmemes.client;
 
+import io.github.phantamanta44.tmemes.ElectricToolRegistry;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -9,14 +10,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.lwjgl.opengl.GL11;
-import slimeknights.tconstruct.library.tools.TinkerToolCore;
 
 import java.util.Objects;
 
 public class MemeRenderInterceptor {
 
     public static void handleRender(ItemStack stack, int posX, int posY) {
-        if (stack.getItem() instanceof TinkerToolCore && stack.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH)) {
+        if (ElectricToolRegistry.isElectric(stack)) {
             IEnergyStorage energy = Objects.requireNonNull(stack.getCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH));
             float fraction = (float)energy.getEnergyStored() / energy.getMaxEnergyStored();
             int barY = posY + (stack.getItem().showDurabilityBar(stack) ? 11 : 13);

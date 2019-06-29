@@ -1,22 +1,21 @@
 package io.github.phantamanta44.tmemes.client;
 
+import io.github.phantamanta44.tmemes.ElectricToolRegistry;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.client.CustomFontColor;
-import slimeknights.tconstruct.library.tools.TinkerToolCore;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Objects;
 
 public class MemeEnergyTooltipHandler {
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof TinkerToolCore
-                && event.getItemStack().hasCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH)) {
+        if (ElectricToolRegistry.isElectric(event.getItemStack())) {
             IEnergyStorage energy = Objects.requireNonNull(
                     event.getItemStack().getCapability(CapabilityEnergy.ENERGY, EnumFacing.NORTH));
             int stored = energy.getEnergyStored();
