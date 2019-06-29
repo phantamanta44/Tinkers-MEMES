@@ -2,7 +2,6 @@ package io.github.phantamanta44.tmemes.integration.conarm;
 
 import c4.conarm.lib.modifiers.ArmorModifierTrait;
 import io.github.phantamanta44.tmemes.trait.TraitElectromechanical;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
