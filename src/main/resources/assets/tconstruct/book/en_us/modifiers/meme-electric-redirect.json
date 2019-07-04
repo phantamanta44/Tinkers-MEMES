@@ -1,0 +1,16 @@
+{
+  "modifier": "meme-electric-redirect",
+  "text": [
+    {
+      "text": "Electrical tools generally produce an energetic flux field while they operate. By exploiting this field's properties, it may be possible to counteract material stress caused by extended use."
+    }
+  ],
+  "effects": [
+    "Can only be applied to electrical Tinkers' tools",
+    "Causes a tool to consume energy in place of durability",
+    "Not useful if you don't have any addons with electrical tools"
+  ],
+  "demoTool": [
+    "plustic:laser_gun"
+  ]
+}

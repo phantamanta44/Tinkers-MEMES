@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " g ",
+    "iai",
+    " g "
+  ],
+  "result": {
+    "item": "tmemes:electric_upgrade",
+    "data": 1
+  },
+  "key": {
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "alloyAdvanced"
+    },
+    "a": {
+      "item": "tmemes:electric_upgrade",
+      "data": 0
+    }
+  }
+}

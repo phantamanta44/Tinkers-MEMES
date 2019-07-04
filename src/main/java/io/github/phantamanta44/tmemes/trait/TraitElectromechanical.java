@@ -1,8 +1,10 @@
 package io.github.phantamanta44.tmemes.trait;
 
+import io.github.phantamanta44.tmemes.capability.MemeEnergyWrapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.energy.CapabilityEnergy;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
@@ -17,6 +19,13 @@ public class TraitElectromechanical extends ModifierTrait {
 
     public TraitElectromechanical() {
         super("meme-electric", 0x9a1610, 5, 0);
+    }
+
+    @Override
+    public boolean canApplyCustom(ItemStack stack) {
+        return (!stack.hasCapability(CapabilityEnergy.ENERGY, null)
+                || stack.getCapability(CapabilityEnergy.ENERGY, null) instanceof MemeEnergyWrapper)
+                && super.canApplyCustom(stack);
     }
 
     @Override

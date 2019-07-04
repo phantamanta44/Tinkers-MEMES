@@ -16,7 +16,7 @@ public class MemeArmourTraits {
 
     public static void init() {
         ARMOUR_MODS.add(ELECTROMECHANICAL = new ArmourTraitElectromechanical());
-        RecipeMatchHolder.addItem(ELECTROMECHANICAL, new ItemStack(MemeItems.ELECTRIC_UPGRADE), 1, 1);
+        RecipeMatchHolder.addItem(ELECTROMECHANICAL, new ItemStack(MemeItems.ELECTRIC_UPGRADE, 1, 0), 1, 1);
     }
 
 }

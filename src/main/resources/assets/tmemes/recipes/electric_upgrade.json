@@ -1,20 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "ata",
     "ici",
     "i i"
   ],
   "result": {
-    "item": "tmemes:electric_upgrade"
+    "item": "tmemes:electric_upgrade",
+    "data": 0
   },
   "key": {
     "t": {
       "item": "mekanism:energytablet"
     },
     "a": {
-      "ore": "circuitElite",
-      "type": "forge:ore_dict"
+      "type": "forge:ore_dict",
+      "ore": "circuitElite"
     },
     "c": {
       "item": "mekanism:basicblock",

@@ -6,25 +6,53 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.library.TinkerRegistry;
 
+/**
+ * Adapted from io.github.phantamanta44.libnine.item.L9Item
+ * (which, ironically enough, was derived from an earlier version of ItemMod)
+ * https://github.com/phantamanta44/libnine/blob/1.12.2/src/main/java/io/github/phantamanta44/libnine/item/L9Item.java
+ */
 public class ItemMod extends Item {
 
-    protected final String modItemName;
+    private final String internalName;
 
     public ItemMod(String name, CreativeTabs tab) {
-        this.modItemName = name;
-        setUnlocalizedName(MEMES.MOD_PREF + name);
-        setRegistryName(new ResourceLocation(MEMES.MOD_ID, name));
+        this.internalName = name;
+        initName();
+        initRegistration();
         setCreativeTab(tab);
-        MEMES.proxy.registerItem(this);
-        queueModelRegistration();
     }
 
     public ItemMod(String name) {
         this(name, TinkerRegistry.tabGeneral);
     }
 
-    protected void queueModelRegistration() {
-        MEMES.proxy.registerModel(this, 0, modItemName);
+    public void postInit() {
+        initModel();
+    }
+
+    /*
+     * Initializers
+     */
+
+    protected void initName() {
+        setUnlocalizedName(MEMES.MOD_PREF + getInternalName());
+    }
+
+    protected void initRegistration() {
+        setRegistryName(new ResourceLocation(MEMES.MOD_ID, getInternalName()));
+        MEMES.proxy.registerItem(this);
+    }
+
+    protected void initModel() {
+        MEMES.proxy.registerModel(this, 0, getInternalName());
+    }
+
+    /*
+     * Properties
+     */
+
+    public String getInternalName() {
+        return internalName;
     }
 
 }

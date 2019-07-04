@@ -1,6 +1,7 @@
 package io.github.phantamanta44.tmemes;
 
 import io.github.phantamanta44.tmemes.capability.CapabilityEventHandler;
+import io.github.phantamanta44.tmemes.item.base.ItemMod;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -11,14 +12,14 @@ import java.util.LinkedList;
 
 public class CommonProxy {
 
-    private final Collection<Item> itemsToRegister = new LinkedList<>();
+    private final Collection<ItemMod> itemsToRegister = new LinkedList<>();
 
     public void registerEventHandlers() {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CapabilityEventHandler());
     }
 
-    public void registerItem(Item item) {
+    public void registerItem(ItemMod item) {
         itemsToRegister.add(item);
     }
 
@@ -32,7 +33,10 @@ public class CommonProxy {
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
-        itemsToRegister.forEach(event.getRegistry()::register);
+        itemsToRegister.forEach(i -> {
+            i.postInit();
+            event.getRegistry().register(i);
+        });
     }
 
 }
