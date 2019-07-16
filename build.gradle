@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0.4"
+version = "1.0.5"
 group = "io.github.phantamanta44.tmemes"
 archivesBaseName = "tmemes-1.12.2"
 
