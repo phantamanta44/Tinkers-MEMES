@@ -2,6 +2,7 @@ package io.github.phantamanta44.tmemes.trait;
 
 import mekanism.api.Coord4D;
 import mekanism.common.OreDictCache;
+import mekanism.common.config.MekanismConfig;
 import mekanism.common.item.ItemAtomicDisassembler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,8 +52,9 @@ public class TraitDisassembling extends ModifierTrait {
             if (shouldContinue) {
                 lock.add(player.getPersistentID());
                 Coord4D coord = new Coord4D(pos, world);
-                ItemAtomicDisassembler.Finder finder
-                        = new ItemAtomicDisassembler.Finder((EntityPlayer)player, broken, coord, trace);
+                ItemAtomicDisassembler.Finder finder = new ItemAtomicDisassembler.Finder(
+                        (EntityPlayer)player, broken, coord, trace,
+                        MekanismConfig.current().general.disassemblerMiningRange.val());
                 for (Coord4D block : finder.calc()) {
                     if (ToolHelper.isBroken(tool))
                         break;
