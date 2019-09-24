@@ -15,9 +15,7 @@
   "dependencies": ["tconstruct", "mekanism", "mekanismgenerators", "mekanismtools", "conarm"],
   "requiredMods": [
     "tconstruct",
-    "mekanism@[1.12.2-9.8.1.383,)",
-    "mekanismgenerators@[1.12.2-9.8.1.383,)",
-    "mekanismtools@[1.12.2-9.8.1.383,)"
+    "mekanism@[1.12.2-9.8.1.383,)"
   ]
 }
 ]
