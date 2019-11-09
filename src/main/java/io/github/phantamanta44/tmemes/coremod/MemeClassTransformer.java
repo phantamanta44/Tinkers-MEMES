@@ -11,6 +11,7 @@ public class MemeClassTransformer implements IClassTransformer {
     @Override
     public byte[] transform(String name, String transformedName, byte[] code) {
         if (transformedName.equals("net.minecraft.client.renderer.RenderItem")) {
+            System.out.println("Attempting to inject energy bar thing...");
             ClassReader reader = new ClassReader(code);
             ClassWriter writer = new ClassWriter(reader, 0);
             reader.accept(new RenderItemTransformer(Opcodes.ASM5, writer), 0);
@@ -49,6 +50,8 @@ public class MemeClassTransformer implements IClassTransformer {
     private static class RenderItemOverlayIntoGuiTransformer extends MethodVisitor {
 
         private int state = 0;
+        @Nullable
+        private Label injectionSite = null;
 
         RenderItemOverlayIntoGuiTransformer(int api, MethodVisitor mv) {
             super(api, mv);
@@ -56,19 +59,40 @@ public class MemeClassTransformer implements IClassTransformer {
 
         @Override
         public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-            String mappedName = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(owner, name, desc);
             if (state == 0) {
-                if (opcode == Opcodes.INVOKEVIRTUAL && mappedName.equals("showDurabilityBar")) {
+                String mappedName = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(owner, name, desc);
+                if ((opcode == Opcodes.INVOKEVIRTUAL && mappedName.equals("showDurabilityBar"))
+                        || (opcode == Opcodes.INVOKESTATIC && mappedName.equals("isItemDamaged"))) { // fuck optifine
                     state = 1;
-                }
-            } else if (state == 1) {
-                if (opcode == Opcodes.INVOKESTATIC
-                        && (mappedName.equals("getMinecraft") || mappedName.equals("func_71410_x"))) {
-                    inject();
-                    state = 2;
                 }
             }
             super.visitMethodInsn(opcode, owner, name, desc, itf);
+        }
+
+        @Override
+        public void visitJumpInsn(int opcode, Label label) {
+            if (state == 1) {
+                injectionSite = label;
+                state = 2;
+            }
+            super.visitJumpInsn(opcode, label);
+        }
+
+        @Override
+        public void visitLabel(Label label) {
+            super.visitLabel(label);
+            if (state == 2 && label.equals(injectionSite)) {
+                state = 3;
+            }
+        }
+
+        @Override
+        public void visitFrame(int type, int nLocal, Object[] local, int nStack, Object[] stack) {
+            super.visitFrame(type, nLocal, local, nStack, stack);
+            if (state == 3) {
+                inject(); // just assume the stack frame is good
+                state = 4;
+            }
         }
 
         private void inject() {
