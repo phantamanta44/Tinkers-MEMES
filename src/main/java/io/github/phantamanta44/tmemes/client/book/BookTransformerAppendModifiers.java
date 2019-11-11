@@ -1,5 +1,6 @@
 package io.github.phantamanta44.tmemes.client.book;
 
+import io.github.phantamanta44.tmemes.client.ClientProxy;
 import io.github.phantamanta44.tmemes.trait.MemeTraits;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.data.PageData;
@@ -18,7 +19,7 @@ public class BookTransformerAppendModifiers extends SectionTransformer {
         ContentListing listing = (ContentListing)section.pages.get(0).content;
         MemeTraits.stream().forEach(trait -> {
             PageData page = new PageData();
-            page.source = section.source;
+            page.source = ClientProxy.TCON_BOOK_REPO;
             page.parent = section;
             page.type = "modifier";
             page.data = "modifiers/" + trait.identifier + ".json";

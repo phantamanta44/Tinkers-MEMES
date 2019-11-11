@@ -10,12 +10,16 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.tuple.Triple;
+import slimeknights.mantle.client.book.repository.BookRepository;
+import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.tconstruct.library.book.TinkerBook;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
 public class ClientProxy extends CommonProxy {
+
+    public static final BookRepository TCON_BOOK_REPO = new FileRepository("tconstruct:book");
 
     private final Collection<Triple<Item, Integer, ModelResourceLocation>> modelsToRegister = new LinkedList<>();
 

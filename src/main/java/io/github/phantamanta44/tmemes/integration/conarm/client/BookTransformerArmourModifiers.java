@@ -18,7 +18,7 @@ public class BookTransformerArmourModifiers extends SectionTransformer {
         ContentListing listing = (ContentListing)section.pages.get(0).content;
         MemeArmourTraits.ARMOUR_MODS.forEach(trait -> {
             PageData page = new PageData();
-            page.source = section.source;
+            page.source = MemeIntegrationConArmClient.CONARM_BOOK_REPO;
             page.parent = section;
             page.type = "armormodifier";
             page.data = "modifiers/" + trait.identifier + ".json";
