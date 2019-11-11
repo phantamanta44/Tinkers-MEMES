@@ -71,7 +71,7 @@ public class TraitDisassembling extends ModifierTrait {
         Vec3d positionEyes = player.getPositionEyes(1.0F);
         Vec3d playerLook = player.getLook(1.0F);
         double blockReachDistance = player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue();
-        Vec3d maxReach = positionEyes.addVector(playerLook.x * blockReachDistance, playerLook.y * blockReachDistance, playerLook.z * blockReachDistance);
+        Vec3d maxReach = positionEyes.add(playerLook.x * blockReachDistance, playerLook.y * blockReachDistance, playerLook.z * blockReachDistance);
         RayTraceResult res = state.collisionRayTrace(player.world, pos, playerLook, maxReach);
         //noinspection ConstantConditions - idea thinks it's nonnull due to package level annotations, but it's not
         return res != null ? res : new RayTraceResult(RayTraceResult.Type.MISS, Vec3d.ZERO, EnumFacing.UP, pos);

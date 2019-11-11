@@ -35,7 +35,7 @@ public class ItemMod extends Item {
      */
 
     protected void initName() {
-        setUnlocalizedName(MEMES.MOD_PREF + getInternalName());
+        setTranslationKey(MEMES.MOD_PREF + getInternalName());
     }
 
     protected void initRegistration() {
